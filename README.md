@@ -1,24 +1,65 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## students テーブル
 
-* Ruby version
+| Column                 | Type       | Options                        |
+| ---------------------- | ---------- | ------------------------------ |
+| student_user_id        | references | null: false foreign_key: true  |
+| name                   | string     | null: false                    |
+| nickname               | string     | null: false                    |
+| encrypted_password     | string     | null: false                    |
+| email                  | string     | null: false                    |
+| phone_number           | string     | null: false                    |
+| birthday               | date       | null: false                    |
+| grade                  | string     | null: false                    |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :classrooms
+- has_many :teachers
 
-* Database creation
 
-* Database initialization
+## classrooms テーブル
 
-* How to run the test suite
+| Column                 | Type       | Options                        |
+| ---------------------- | ---------- | ------------------------------ |
+| student_user_id        | references | null: false foreign_key: true  |
+| teacher_user_id        | references | null: false foreign_key: true  |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- has_one :students
+- has_one :teachers
 
-* ...
+
+## teachers テーブル
+
+| Column                 | Type       | Options                        |
+| ---------------------- | ---------- | ------------------------------ |
+| teacher_user_id        | references | null: false foreign_key: true  |
+| name                   | string     | null: false                    |
+| encrypted_password     | string     | null: false                    |
+| email                  | string     | null: false                    |
+| phone_number           | string     | null: false                    |
+| birthday               | date       | null: false                    |
+| educational_background | string     | null: false                    |
+| subject                | string     | null: false                    |
+| pr                     | text       | null: false                    |
+| review                 | integer    | null: false                    |
+
+### Association
+
+- has_many :classrooms
+- has_many :students
+
+
+## homerooms テーブル
+
+| Column                 | Type       | Options                        |
+| ---------------------- | ---------- | ------------------------------ |
+| student_user_id        | references | null: false foreign_key: true  |
+
+### Association
+
+- has_many :students
